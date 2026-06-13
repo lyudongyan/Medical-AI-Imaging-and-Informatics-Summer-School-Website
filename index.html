@@ -272,17 +272,15 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
 .member{position:relative;flex:0 0 200px;width:200px;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:linear-gradient(135deg,#dbe6fb,#c3d4f2);box-shadow:0 10px 28px -10px rgba(0,18,51,.4),inset 0 1px 0 rgba(255,255,255,.6)}
 @media (max-width:480px){.member{flex:0 0 46%;width:46%}}
-/* team section background life */
+/* team section: faint, slowly moving gradient background */
 #team{position:relative;overflow:hidden}
 #team .wrap{position:relative;z-index:1}
 .team-deco{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.tblob{position:absolute;border-radius:50%;filter:blur(72px)}
-.tblob.b1{width:440px;height:440px;background:radial-gradient(circle,rgba(26,76,204,.22),transparent 70%);top:5%;left:-140px}
-.tblob.b2{width:520px;height:520px;background:radial-gradient(circle,rgba(242,169,0,.15),transparent 70%);bottom:3%;right:-160px}
-.tblob.b3{width:360px;height:360px;background:radial-gradient(circle,rgba(0,115,153,.16),transparent 70%);top:44%;right:16%}
-.sdraw{position:absolute;inset:0;width:100%;height:100%}
-.sdraw .sdpath{fill:none;stroke:rgba(0,38,119,.14);stroke-width:2;stroke-linecap:round}
-.sdraw .sdpath.gold{stroke:rgba(242,169,0,.24)}
+.team-aurora{position:absolute;inset:-30%;will-change:transform;filter:blur(26px);
+  background:radial-gradient(38% 38% at 28% 30%,rgba(26,76,204,.13),transparent 70%),radial-gradient(44% 44% at 74% 66%,rgba(242,169,0,.11),transparent 70%),radial-gradient(40% 40% at 60% 18%,rgba(0,115,153,.11),transparent 72%);
+  animation:team-drift 30s ease-in-out infinite alternate}
+@keyframes team-drift{0%{transform:rotate(0deg) scale(1) translate(0,0)}50%{transform:rotate(7deg) scale(1.08) translate(2%,-2%)}100%{transform:rotate(-6deg) scale(1.06) translate(-2%,2%)}}
+@media (prefers-reduced-motion:reduce){.team-aurora{animation:none}}
 .member img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
 .member:hover img{transform:scale(1.07)}
 .member .fallback{width:100%;height:100%;display:grid;place-items:center;font-family:var(--font-display);font-size:46px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--tertiary-bright))}
@@ -622,13 +620,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 </section>
 
 <section class="section cv" id="team" style="background:linear-gradient(180deg,#f6f9fe,#eef4ff)">
-  <div class="team-deco" aria-hidden="true">
-    <span class="tblob b1 float"></span>
-    <span class="tblob b2 float-slow"></span>
-    <span class="tblob b3 float"></span>
-    <svg class="sdraw" viewBox="0 0 1000 2400" preserveAspectRatio="none"><path class="sdpath" d="M 150 0 C 520 380 60 720 600 1040 C 1040 1300 240 1560 760 1880 C 1040 2060 300 2220 880 2400"></path></svg>
-    <svg class="sdraw" viewBox="0 0 1000 2400" preserveAspectRatio="none"><path class="sdpath gold" d="M 870 0 C 520 360 980 700 360 1020 C -20 1240 760 1520 280 1860 C 60 2020 700 2220 160 2400"></path></svg>
-  </div>
+  <div class="team-deco" aria-hidden="true"><div class="team-aurora"></div></div>
   <div class="wrap">
     <span class="eyebrow reveal">The people</span>
     <h2 class="title reveal d1">Our Team</h2>
@@ -912,25 +904,6 @@ window.addEventListener("scroll",updateCurves,{passive:true});
 window.addEventListener("resize",buildCurves);
 window.addEventListener("load",buildCurves);
 buildCurves(); setTimeout(buildCurves,400); setTimeout(buildCurves,1200);
-
-/* decorative scroll-draw lines (team section background) */
-function buildDraws(){
-  document.querySelectorAll(".sdraw .sdpath").forEach(function(p){p.style.strokeDasharray=p.getTotalLength();});
-  updateDraws();
-}
-function updateDraws(){
-  document.querySelectorAll(".sdraw").forEach(function(svg){
-    var sec=svg.closest("section"); if(!sec) return;
-    var p=svg.querySelector(".sdpath"); if(!p) return;
-    var r=sec.getBoundingClientRect(), vh=window.innerHeight;
-    var prog=(vh*0.9 - r.top)/(r.height*0.95); prog=Math.max(0,Math.min(1,prog));
-    p.style.strokeDashoffset=p.getTotalLength()*(1-prog);
-  });
-}
-window.addEventListener("scroll",updateDraws,{passive:true});
-window.addEventListener("resize",buildDraws);
-window.addEventListener("load",buildDraws);
-buildDraws(); setTimeout(buildDraws,400);
 
 var mf=document.querySelector(".mouse-follower");
 window.addEventListener("mousemove",function(e){document.body.classList.add("mouse-on");
