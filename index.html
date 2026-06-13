@@ -116,10 +116,10 @@ body.mouse-on .mouse-follower{opacity:1}
   box-shadow:0 20px 60px rgba(0,0,0,.45);transition:width .38s cubic-bezier(.2,.8,.2,1)}
 /* skyline spans the FULL length of the bar */
 .sidenav::before{content:"";position:absolute;inset:0;z-index:0;
-  background:url("photos%20and%20videos/university-of-pittsburgh-cloudy-skyline-dol98832g1ht6q32.jpg") center/cover;opacity:.5}
-/* aggressive dark gradient across the WHOLE length so there is no hard divide */
+  background:url("photos%20and%20videos/university-of-pittsburgh-cloudy-skyline-dol98832g1ht6q32.jpg") center/cover;opacity:.62}
+/* dark gradient across the WHOLE length (slightly lighter so the skyline shows a bit more) */
 .sidenav::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg,rgba(0,8,30,.96) 0%,rgba(0,11,36,.9) 30%,rgba(0,13,42,.84) 60%,rgba(0,15,46,.82) 100%)}
+  background:linear-gradient(180deg,rgba(0,8,30,.9) 0%,rgba(0,11,36,.78) 32%,rgba(0,13,42,.64) 62%,rgba(0,15,46,.6) 100%)}
 .sidenav>*{position:relative;z-index:2}
 .sidenav:hover{width:var(--nav-w-open)}
 .sn-brand{display:flex;align-items:center;gap:12px;padding:6px 0 0 22px;height:46px}
@@ -172,7 +172,8 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .hero-inner{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;width:100%}
 .hero h1{font-size:clamp(44px,7vw,90px);line-height:1.03;margin:20px 0 10px;max-width:16ch}
 .hero h1 .gold{color:var(--secondary-bright)}
-.hero .tagline{font-size:clamp(18px,2.4vw,25px);font-family:var(--font-display);font-style:italic;color:var(--inverse-primary);margin-bottom:22px}
+.hero .tagline{font-size:clamp(17px,2.2vw,23px);font-family:var(--font-display);font-style:italic;color:var(--inverse-primary);margin-bottom:14px}
+.hero .hero-sub{font-family:var(--font-display);font-weight:700;font-size:clamp(21px,3vw,36px);line-height:1.16;color:#fff;margin-bottom:18px;max-width:20ch}
 .hero .blurb{font-size:18px;max-width:60ch;color:rgba(255,255,255,.92)}
 .hero .facts{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
 .fact{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:16px;font-size:14px;font-weight:600;color:#fff}
@@ -268,8 +269,20 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .team-group .gh{display:flex;align-items:center;gap:14px;margin-bottom:26px}
 .team-group .gh h3{font-size:24px;color:var(--primary)}
 .team-group .gh .line{flex:1;height:1px;background:linear-gradient(90deg,var(--outline-variant),transparent)}
-.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:22px}
-.member{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:linear-gradient(135deg,#dbe6fb,#c3d4f2);box-shadow:0 10px 28px -10px rgba(0,18,51,.4),inset 0 1px 0 rgba(255,255,255,.6)}
+.team-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:22px}
+.member{position:relative;flex:0 0 200px;width:200px;border-radius:20px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;background:linear-gradient(135deg,#dbe6fb,#c3d4f2);box-shadow:0 10px 28px -10px rgba(0,18,51,.4),inset 0 1px 0 rgba(255,255,255,.6)}
+@media (max-width:480px){.member{flex:0 0 46%;width:46%}}
+/* team section background life */
+#team{position:relative;overflow:hidden}
+#team .wrap{position:relative;z-index:1}
+.team-deco{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.tblob{position:absolute;border-radius:50%;filter:blur(72px)}
+.tblob.b1{width:440px;height:440px;background:radial-gradient(circle,rgba(26,76,204,.22),transparent 70%);top:5%;left:-140px}
+.tblob.b2{width:520px;height:520px;background:radial-gradient(circle,rgba(242,169,0,.15),transparent 70%);bottom:3%;right:-160px}
+.tblob.b3{width:360px;height:360px;background:radial-gradient(circle,rgba(0,115,153,.16),transparent 70%);top:44%;right:16%}
+.sdraw{position:absolute;inset:0;width:100%;height:100%}
+.sdraw .sdpath{fill:none;stroke:rgba(0,38,119,.14);stroke-width:2;stroke-linecap:round}
+.sdraw .sdpath.gold{stroke:rgba(242,169,0,.24)}
 .member img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
 .member:hover img{transform:scale(1.07)}
 .member .fallback{width:100%;height:100%;display:grid;place-items:center;font-family:var(--font-display);font-size:46px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--tertiary-bright))}
@@ -410,8 +423,9 @@ body.nav-open .scrim{opacity:1;visibility:visible}
   <div class="glow g2 float-slow"></div>
   <div class="hero-inner">
     <span class="eyebrow eyebrow-light">University of Pittsburgh · Since 2023</span>
-    <h1 class="split" id="heroTitle">Where high schoolers <span class="gold">teach machines</span> to see medicine.</h1>
-    <div class="tagline">The AI Summer School on Medical Imaging Informatics</div>
+    <h1 class="split" id="heroTitle">AI Summer School</h1>
+    <div class="tagline">Medical Imaging Informatics</div>
+    <p class="hero-sub reveal d1">Where high schoolers <span class="gold">teach machines</span> to see medicine.</p>
     <p class="blurb">A free, immersive one-week journey into artificial intelligence and computer vision for
       medical images, hosted by the <span class="hl">Pitt HexAI Research Laboratory</span> and the
       Computational Pathology and AI Center of Excellence.</p>
@@ -493,10 +507,13 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 /* curved, scroll-drawn timeline */
 .ptimeline{position:relative;margin-top:50px;padding:6px 0}
 .pcurve{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:visible}
-.pcurve #pcurvePath{fill:none;stroke:var(--secondary-bright);stroke-width:3;stroke-linecap:round;
+.pcurve .pcurvePath{fill:none;stroke:var(--secondary-bright);stroke-width:3;stroke-linecap:round;
   filter:drop-shadow(0 0 6px rgba(242,169,0,.55))}
 .ptimeline .tnode{position:relative;width:48%;margin:0 0 50px 0;padding:0}
 .ptimeline .tnode::before{display:none}
+.ptimeline .tnode h4{color:#fff}
+.ptimeline .tnode p{color:rgba(255,255,255,.88)}
+.ptimeline .tnode .day{color:var(--secondary-bright)}
 .ptimeline .tnode.l{margin-right:auto}
 .ptimeline .tnode.r{margin-left:auto}
 .ptimeline .tnode:last-child{margin-bottom:0}
@@ -511,7 +528,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
   .ptimeline .tnode,.ptimeline .tnode.l,.ptimeline .tnode.r{width:auto;margin:0 0 32px 36px}
   .tnode.l .pdot,.tnode.r .pdot{left:-26px;right:auto}
 }
-@media (prefers-reduced-motion:reduce){.reveal-f{opacity:1}.pcurve #pcurvePath{stroke-dashoffset:0!important}}
+@media (prefers-reduced-motion:reduce){.reveal-f{opacity:1}.pcurve .pcurvePath{stroke-dashoffset:0!important}}
 </style>
 
 <section class="section img-bg" id="program">
@@ -523,7 +540,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
     <p class="lead reveal d2">A comprehensive one-week program that takes students from foundational concepts
       to a real, collaborative AI project, with lectures, hands-on coding, and guest talks every day.</p>
     <div class="ptimeline" id="ptimeline">
-      <svg class="pcurve" id="pcurve" preserveAspectRatio="none" aria-hidden="true"><path id="pcurvePath"></path></svg>
+      <svg class="pcurve" preserveAspectRatio="none" aria-hidden="true"><path class="pcurvePath"></path></svg>
       <div class="tnode l reveal-f"><span class="pdot"></span><div class="tcard glass-dark sheen"><div class="day">Foundations</div><h4>Intro to AI and computer vision</h4><p>The program opens with foundational concepts: an introduction to AI, computer vision, and digital image operations, followed by hands-on practice with Python and Google Colab.</p></div></div>
       <div class="tnode r reveal-f"><span class="pdot"></span><div class="tcard glass-dark sheen"><div class="day">Building up</div><h4>Deep learning and CNNs</h4><p>As the week progresses, students explore advanced topics such as deep learning and convolutional neural networks (CNNs), the engines behind modern image understanding.</p></div></div>
       <div class="tnode l reveal-f"><span class="pdot"></span><div class="tcard glass-dark sheen"><div class="day">Going deeper</div><h4>Object detection: YOLO and SSD</h4><p>Students learn object detection techniques like YOLO and SSD, practicing medical image annotation, image filtering, and object localization with tools like PyTorch, ITK-SNAP, and Liner.ai.</p></div></div>
@@ -571,7 +588,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
           acknowledging their commitment and accomplishments in AI-powered medical imaging informatics.</p>
         <p style="color:var(--primary);font-weight:600">Applications open each spring. Check back ahead of the next cohort, or follow Pitt HexAI for announcements.</p>
       </div>
-      <div class="reg-status bg-aurora sheen reveal-r d1">
+      <div class="reg-status bg-aurora sheen reveal-r d1" style="margin-top:-28px">
         <div class="now"><span class="pill pill-closed">Closed</span><span style="color:rgba(255,255,255,.82);font-size:14px">2026 cohort</span></div>
         <h4>Registration cycles</h4>
         <ul class="yearlist">
@@ -605,6 +622,13 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 </section>
 
 <section class="section cv" id="team" style="background:linear-gradient(180deg,#f6f9fe,#eef4ff)">
+  <div class="team-deco" aria-hidden="true">
+    <span class="tblob b1 float"></span>
+    <span class="tblob b2 float-slow"></span>
+    <span class="tblob b3 float"></span>
+    <svg class="sdraw" viewBox="0 0 1000 2400" preserveAspectRatio="none"><path class="sdpath" d="M 150 0 C 520 380 60 720 600 1040 C 1040 1300 240 1560 760 1880 C 1040 2060 300 2220 880 2400"></path></svg>
+    <svg class="sdraw" viewBox="0 0 1000 2400" preserveAspectRatio="none"><path class="sdpath gold" d="M 870 0 C 520 360 980 700 360 1020 C -20 1240 760 1520 280 1860 C 60 2020 700 2220 160 2400"></path></svg>
+  </div>
   <div class="wrap">
     <span class="eyebrow reveal">The people</span>
     <h2 class="title reveal d1">Our Team</h2>
@@ -620,8 +644,8 @@ body.nav-open .scrim{opacity:1;visibility:visible}
     <span class="eyebrow reveal">Our growing community</span>
     <h2 class="title reveal d1">Alumni</h2>
     <p class="lead reveal d2">Students from four cohorts who have come through the AI Summer School (first names only).</p>
+    <div class="alumni-band reveal d2" id="alumniBand"></div>
   </div>
-  <div class="alumni-band reveal d2" id="alumniBand"></div>
 </section>
 
 <section class="section img-bg cv" id="statistics">
@@ -647,6 +671,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -849,42 +874,63 @@ scrim.addEventListener("click",function(){document.body.classList.remove("nav-op
 var yb=document.getElementById("yr2025btn"),ybody=document.getElementById("yr2025body");
 yb.addEventListener("click",function(){yb.classList.toggle("open");ybody.classList.toggle("open");if(ybody.classList.contains("open")){setTimeout(observeReveals,50);}});
 
-/* curved, scroll-drawn program timeline */
-var pcurveLen=0, pdots=[];
-function buildCurve(){
-  var tl=document.getElementById("ptimeline"); if(!tl) return;
-  var svg=document.getElementById("pcurve"), path=document.getElementById("pcurvePath");
-  pdots=[].slice.call(tl.querySelectorAll(".pdot"));
-  if(pdots.length<2) return;
-  var W=tl.clientWidth, H=tl.clientHeight, box=tl.getBoundingClientRect();
-  svg.setAttribute("viewBox","0 0 "+W+" "+H);
-  var pts=pdots.map(function(d){var r=d.getBoundingClientRect();return {x:r.left-box.left+r.width/2,y:r.top-box.top+r.height/2};});
-  var dstr="M "+pts[0].x.toFixed(1)+" "+pts[0].y.toFixed(1);
-  for(var i=0;i<pts.length-1;i++){
-    var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||pts[i+1];
-    var c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
-    var c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
-    dstr+=" C "+c1x.toFixed(1)+" "+c1y.toFixed(1)+" "+c2x.toFixed(1)+" "+c2y.toFixed(1)+" "+p2.x.toFixed(1)+" "+p2.y.toFixed(1);
-  }
-  path.setAttribute("d",dstr);
-  pcurveLen=path.getTotalLength();
-  path.style.strokeDasharray=pcurveLen;
-  updateCurve();
+/* curved, scroll-drawn timelines (works for every .ptimeline on the page) */
+function buildCurves(){
+  document.querySelectorAll(".ptimeline").forEach(function(tl){
+    var svg=tl.querySelector(".pcurve"), path=tl.querySelector(".pcurvePath");
+    var dots=[].slice.call(tl.querySelectorAll(".pdot"));
+    if(!svg||!path||dots.length<2) return;
+    var W=tl.clientWidth, H=tl.clientHeight, box=tl.getBoundingClientRect();
+    svg.setAttribute("viewBox","0 0 "+W+" "+H);
+    var pts=dots.map(function(d){var r=d.getBoundingClientRect();return {x:r.left-box.left+r.width/2,y:r.top-box.top+r.height/2};});
+    var dstr="M "+pts[0].x.toFixed(1)+" "+pts[0].y.toFixed(1);
+    for(var i=0;i<pts.length-1;i++){
+      var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||pts[i+1];
+      var c1x=p1.x+(p2.x-p0.x)/6,c1y=p1.y+(p2.y-p0.y)/6;
+      var c2x=p2.x-(p3.x-p1.x)/6,c2y=p2.y-(p3.y-p1.y)/6;
+      dstr+=" C "+c1x.toFixed(1)+" "+c1y.toFixed(1)+" "+c2x.toFixed(1)+" "+c2y.toFixed(1)+" "+p2.x.toFixed(1)+" "+p2.y.toFixed(1);
+    }
+    path.setAttribute("d",dstr);
+    var len=path.getTotalLength();
+    tl._len=len; tl._dots=dots; tl._path=path;
+    path.style.strokeDasharray=len;
+  });
+  updateCurves();
 }
-function updateCurve(){
-  var tl=document.getElementById("ptimeline"); if(!tl||!pcurveLen) return;
-  var path=document.getElementById("pcurvePath");
-  var r=tl.getBoundingClientRect(), vh=window.innerHeight;
-  var prog=(vh*0.78 - r.top)/(r.height*0.82);
-  prog=Math.max(0,Math.min(1,prog));
-  path.style.strokeDashoffset=pcurveLen*(1-prog);
-  var n=pdots.length;
-  pdots.forEach(function(d,i){d.classList.toggle("on",prog>=(i+0.55)/n);});
+function updateCurves(){
+  document.querySelectorAll(".ptimeline").forEach(function(tl){
+    if(!tl._len) return;
+    var r=tl.getBoundingClientRect(), vh=window.innerHeight;
+    var prog=(vh*0.78 - r.top)/(r.height*0.82);
+    prog=Math.max(0,Math.min(1,prog));
+    tl._path.style.strokeDashoffset=tl._len*(1-prog);
+    var n=tl._dots.length;
+    tl._dots.forEach(function(d,i){d.classList.toggle("on",prog>=(i+0.55)/n);});
+  });
 }
-window.addEventListener("scroll",updateCurve,{passive:true});
-window.addEventListener("resize",buildCurve);
-window.addEventListener("load",buildCurve);
-buildCurve(); setTimeout(buildCurve,400); setTimeout(buildCurve,1200);
+window.addEventListener("scroll",updateCurves,{passive:true});
+window.addEventListener("resize",buildCurves);
+window.addEventListener("load",buildCurves);
+buildCurves(); setTimeout(buildCurves,400); setTimeout(buildCurves,1200);
+
+/* decorative scroll-draw lines (team section background) */
+function buildDraws(){
+  document.querySelectorAll(".sdraw .sdpath").forEach(function(p){p.style.strokeDasharray=p.getTotalLength();});
+  updateDraws();
+}
+function updateDraws(){
+  document.querySelectorAll(".sdraw").forEach(function(svg){
+    var sec=svg.closest("section"); if(!sec) return;
+    var p=svg.querySelector(".sdpath"); if(!p) return;
+    var r=sec.getBoundingClientRect(), vh=window.innerHeight;
+    var prog=(vh*0.9 - r.top)/(r.height*0.95); prog=Math.max(0,Math.min(1,prog));
+    p.style.strokeDashoffset=p.getTotalLength()*(1-prog);
+  });
+}
+window.addEventListener("scroll",updateDraws,{passive:true});
+window.addEventListener("resize",buildDraws);
+window.addEventListener("load",buildDraws);
+buildDraws(); setTimeout(buildDraws,400);
 
 var mf=document.querySelector(".mouse-follower");
 window.addEventListener("mousemove",function(e){document.body.classList.add("mouse-on");
