@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="AI Summer School on Medical Imaging Informatics, University of Pittsburgh. A free one-week AI program for high school students in grades 11 and 12.">
 <title>AI Summer School · Medical Imaging Informatics · University of Pittsburgh</title>
+<link rel="icon" type="image/png" href="photos%20and%20videos/Pitthexai_logo.png">
+<link rel="apple-touch-icon" href="photos%20and%20videos/Pitthexai_logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -123,8 +125,9 @@ body.mouse-on .mouse-follower{opacity:1}
 .sidenav>*{position:relative;z-index:2}
 .sidenav:hover{width:var(--nav-w-open)}
 .sn-brand{display:flex;align-items:center;gap:12px;padding:6px 0 0 22px;height:46px}
-.sn-mark{flex:0 0 auto;width:44px;height:44px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 16px -4px rgba(0,0,0,.4)}
-.sn-mark img{height:52px;width:auto;max-width:none;display:block;margin:-3px 0 0 -3px}
+.sn-mark{flex:0 0 auto;width:42px;height:42px;border-radius:12px;background:#fff;display:grid;place-items:center;box-shadow:0 6px 16px -4px rgba(0,0,0,.4)}
+.sn-mark .hexclip{width:28px;height:28px;overflow:hidden;position:relative}
+.sn-mark .hexclip img{position:absolute;height:36px;width:auto;max-width:none;left:-1px;top:-2px;display:block}
 .sn-full{white-space:nowrap;opacity:0;transform:translateX(-6px);transition:.3s;transition-delay:.05s}
 .sidenav:hover .sn-full{opacity:1;transform:none}
 .sn-full .t{font-family:var(--font-display);font-size:18px;line-height:1.05}
@@ -264,21 +267,21 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .quote p{font-size:15.5px;color:#fff;font-style:italic;position:relative;z-index:1}
 .quote .who{margin-top:16px;display:flex;align-items:center;gap:11px;font-weight:700;color:#fff}
 .quote .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-style:normal;font-family:var(--font-body);background:linear-gradient(135deg,var(--secondary-bright),var(--secondary))}
-/* testimonial carousel */
-.carousel{position:relative;max-width:840px;margin:40px auto 0}
-.carousel-viewport{overflow:hidden;border-radius:20px}
-.carousel-track{display:flex;align-items:stretch;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
-.tslide{flex:0 0 100%;min-width:100%;padding:4px}
-.tslide .quote{margin:0;height:100%;transition:none}
+/* testimonial carousel (3 visible, center focus) */
+.carousel{position:relative;max-width:1040px;margin:40px auto 0}
+.carousel-viewport{overflow:hidden;padding:6px 0}
+.carousel-track{display:flex;align-items:stretch;gap:24px;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.tslide{flex:0 0 58%;min-width:0;opacity:.4;transform:scale(.9);transition:opacity .5s,transform .5s;cursor:pointer}
+.tslide.active{opacity:1;transform:scale(1);cursor:default}
+.tslide .quote{margin:0;height:100%}
 .tslide .quote:hover{transform:none}
-.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.32);background:rgba(0,18,51,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .25s,transform .25s}
-.carousel-arrow:hover{background:rgba(0,18,51,.72);transform:translateY(-50%) scale(1.08)}
-.carousel-arrow.prev{left:-12px}
-.carousel-arrow.next{right:-12px}
-.carousel-dots{display:flex;justify-content:center;gap:9px;margin-top:22px}
+.carousel-nav{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:24px}
+.cnav{cursor:pointer;user-select:none;font-size:30px;line-height:1;color:rgba(255,255,255,.7);transition:color .2s,transform .2s;padding:0 4px}
+.cnav:hover{color:#fff;transform:scale(1.2)}
+.carousel-dots{display:flex;justify-content:center;gap:9px}
 .cdot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.25s}
 .cdot.on{background:var(--secondary-bright);transform:scale(1.3)}
-@media (max-width:560px){.carousel-arrow.prev{left:2px}.carousel-arrow.next{right:2px}}
+@media (max-width:700px){.tslide{flex:0 0 84%}}
 
 /* ════ TEAM ════ */
 .team-group{margin-top:52px}
@@ -343,6 +346,15 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .alumni-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--secondary-bright);flex:0 0 auto}
 @media (max-width:900px){.alumni-list{columns:3}}
 @media (max-width:540px){.alumni-list{columns:2}}
+/* FAQ accordion */
+.faq{max-width:840px;margin:38px auto 0;display:flex;flex-direction:column;gap:14px}
+.faq-item{border-radius:16px;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.46));border:1px solid rgba(0,38,119,.12);box-shadow:0 6px 18px rgba(0,18,51,.06)}
+.faq-q{width:100%;text-align:left;cursor:pointer;border:0;background:transparent;padding:18px 22px;font-family:var(--font-body);font-weight:700;font-size:16.5px;color:var(--primary);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.faq-ic{flex:0 0 auto;font-size:24px;line-height:1;color:var(--secondary);transition:transform .3s}
+.faq-item.open .faq-ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+.faq-a p{padding:0 22px 18px;color:var(--on-surface-variant);font-size:15px;line-height:1.6}
+.faq-item.open .faq-a{max-height:360px}
 
 /* ════ STATS ════ */
 .statband{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
@@ -419,7 +431,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 <div class="scrim" id="scrim"></div>
 
 <nav class="sidenav" id="sidenav">
-  <div class="sn-brand"><span class="sn-mark"><img src="photos%20and%20videos/Pitthexai_logo.png" alt="Pitt HexAI"></span><span class="sn-full"><span class="t">AI <b>Summer</b> School</span><br><span class="s">Medical Imaging Informatics</span></span></div>
+  <div class="sn-brand"><span class="sn-mark"><span class="hexclip"><img src="photos%20and%20videos/Pitthexai_logo.png" alt="Pitt HexAI"></span></span><span class="sn-full"><span class="t">AI <b>Summer</b> School</span><br><span class="s">Medical Imaging Informatics</span></span></div>
   <div class="navlist" id="navlist">
     <a class="navlink active" data-to="home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="lbl">Home</span></a>
     <a class="navlink" data-to="about"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span><span class="lbl">About</span></a>
@@ -430,6 +442,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
     <a class="navlink" data-to="alumni"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 7a4 4 0 100 8 4 4 0 000-8zM23 21v-2a4 4 0 00-3-3.87"/></svg></span><span class="lbl">Alumni</span></a>
     <a class="navlink" data-to="statistics"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 3 3 5-6"/></svg></span><span class="lbl">By the Numbers</span></a>
     <a class="navlink" data-to="sponsors"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.4H22l-6 4.5 2.3 7.1L12 16.8 5.7 21l2.3-7.1-6-4.5h7.6z"/></svg></span><span class="lbl">Sponsors</span></a>
+    <a class="navlink" data-to="faq"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 015.4 1c0 1.9-2.8 2.5-2.8 2.5M12 17h.01"/></svg></span><span class="lbl">FAQ</span></a>
   </div>
   <a class="sn-cta" href="https://github.com/pitthexai/AISummerSchoolinMedicalImagingInformatics" target="_blank" rel="noopener"><span class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5A11.5 11.5 0 008.4 22.9c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.4-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.4 11.4 0 016 0C17.3 4.7 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0012 .5z"/></svg></span><span class="lbl">Curriculum</span></a>
   <div class="sn-foot">Pitt HexAI Research Laboratory and CPACE, Pittsburgh PA</div>
@@ -623,7 +636,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
   </div>
 </section>
 
-<section class="section img-bg cv" id="testimonials">
+<section class="section img-bg" id="testimonials">
   <div class="imgbg" style="background-image:url('photos%20and%20videos/1749519856667.jpg')"></div>
   <div class="imgbg-ov" style="background:linear-gradient(135deg,rgba(0,12,40,.92),rgba(0,31,84,.82) 55%,rgba(0,77,102,.74))"></div>
   <div class="wrap ta-right">
@@ -633,7 +646,6 @@ body.nav-open .scrim{opacity:1;visibility:visible}
   </div>
   <div class="wrap">
     <div class="carousel reveal d1" id="tCarousel">
-      <button class="carousel-arrow prev" id="tPrev" aria-label="Previous testimonial">&#8249;</button>
       <div class="carousel-viewport"><div class="carousel-track" id="tTrack">
         <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>Everything was just so interesting and I feel like I have found something new that I might want to pursue in the future. Dr. Tafti and all the other instructors were very helpful and really facilitated the entire learning process. I found that AI and all these really hard things that I always thought were complicated were actually quite easy to understand.</p><div class="who"><span class="av">K</span>Katherine</div></div></div>
         <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>After coming here I learned a lot. I didn't know much about AI before. Now I've learned about machine learning and deep learning and the differences between them. I feel like AI is such a big, broad topic that can really be implemented into anything.</p><div class="who"><span class="av">S</span>Sophia</div></div></div>
@@ -641,8 +653,11 @@ body.nav-open .scrim{opacity:1;visibility:visible}
         <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>It was such a pleasure being part of the AI in Medical Imaging camp this past week. Thank you for leading such a fun and insightful experience! I really appreciated the engaging teaching style and the way complex concepts were broken down. The camp has sparked my interest in bioinformatics and the intersection between AI and medicine.</p><div class="who"><span class="av">H</span>Hrshikesh</div></div></div>
         <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>Thank you very much for conducting this AI Summer School. I feel like I learned a lot, and I am now interested in maybe pursuing a career in health informatics.</p><div class="who"><span class="av">P</span>Pragnya</div></div></div>
       </div></div>
-      <button class="carousel-arrow next" id="tNext" aria-label="Next testimonial">&#8250;</button>
-      <div class="carousel-dots" id="tDots"></div>
+      <div class="carousel-nav">
+        <span class="cnav" id="tPrev" role="button" tabindex="0" aria-label="Previous testimonial">&#8249;</span>
+        <div class="carousel-dots" id="tDots"></div>
+        <span class="cnav" id="tNext" role="button" tabindex="0" aria-label="Next testimonial">&#8250;</span>
+      </div>
     </div>
   </div>
 </section>
@@ -716,6 +731,25 @@ body.nav-open .scrim{opacity:1;visibility:visible}
         <a class="sponsor glass sheen" href="https://logcabinfence.com/" target="_blank" rel="noopener"><span class="logo"><img src="photos%20and%20videos/Sponsors/Log_Cabin_Fence.png" alt="Log Cabin Fence" loading="lazy" decoding="async"></span><p>Log Cabin Fence</p></a>
         <a class="sponsor glass sheen" href="https://humanitarianai.org/" target="_blank" rel="noopener"><span class="logo"><img src="photos%20and%20videos/Sponsors/HAIToday_icon.png" alt="Humanitarian AI" loading="lazy" decoding="async"></span><p>Humanitarian AI</p></a>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="faq" style="background:linear-gradient(180deg,#eef4ff,#f6f9fe)">
+  <div class="wrap">
+    <span class="eyebrow reveal">Good to know</span>
+    <h2 class="title reveal d1">Frequently Asked Questions</h2>
+    <p class="lead reveal d2">Everything you might want to know before applying. Tap a question to expand it.</p>
+    <div class="faq reveal d2" id="faqList">
+      <div class="faq-item"><button class="faq-q">Who can apply?<span class="faq-ic">+</span></button><div class="faq-a"><p>High school students in grades 11 and 12. Students from all backgrounds and levels of experience are encouraged to apply, no prior AI background required.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How much does it cost?<span class="faq-ic">+</span></button><div class="faq-a"><p>Nothing. The AI Summer School is completely free, and lunch is provided at no cost each day.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Do I need coding experience?<span class="faq-ic">+</span></button><div class="faq-a"><p>The only prerequisite is basic Python programming, and a beginner-friendly tutorial is shared beforehand. Everything else is taught from the ground up.</p></div></div>
+      <div class="faq-item"><button class="faq-q">When and where is it held?<span class="faq-ic">+</span></button><div class="faq-a"><p>The 2026 school runs Monday, June 8 to Friday, June 12, 9:00 am to 4:00 pm EDT, in person at the University of Pittsburgh in Pittsburgh, Pennsylvania. Admitted students receive additional location details.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What will I learn and do?<span class="faq-ic">+</span></button><div class="faq-a"><p>Foundations of AI and computer vision, deep learning and convolutional neural networks, and object detection with YOLO and SSD, all hands-on in Python and Google Colab. You will practice medical image annotation and finish with a collaborative team project, plus daily guest talks.</p></div></div>
+      <div class="faq-item"><button class="faq-q">What should I bring?<span class="faq-ic">+</span></button><div class="faq-a"><p>A laptop and charger (and a mouse if you prefer one). Lunch is provided free each day.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Will I receive a certificate?<span class="faq-ic">+</span></button><div class="faq-a"><p>Yes. Students who successfully complete the program receive a certificate of participation in AI-powered medical imaging informatics.</p></div></div>
+      <div class="faq-item"><button class="faq-q">How do I apply?<span class="faq-ic">+</span></button><div class="faq-a"><p>Applications open each spring, right here on this website. The 2026 cohort is now closed, so check back ahead of the next cycle.</p></div></div>
+      <div class="faq-item"><button class="faq-q">Who organizes the school?<span class="faq-ic">+</span></button><div class="faq-a"><p>The Pitt HexAI Research Laboratory and the Computational Pathology and AI Center of Excellence (CPACE) at the University of Pittsburgh, in collaboration with the School of Health and Rehabilitation Sciences and the IEEE Computer Society.</p></div></div>
     </div>
   </div>
 </section>
@@ -945,21 +979,36 @@ document.addEventListener("click",function(e){
   if(grid){grid.classList.toggle("open"); if(grid.classList.contains("open")) setTimeout(observeReveals,30);}
 });
 
-/* testimonial carousel */
+/* testimonial carousel (3 visible, center focus, autoplay 4s) */
 (function(){
   var track=document.getElementById("tTrack"); if(!track) return;
-  var slides=track.children, n=slides.length, idx=0, timer=null;
+  var viewport=track.parentNode;
+  var slides=[].slice.call(track.children), n=slides.length, idx=0, timer=null;
   var dotsWrap=document.getElementById("tDots"), dots=[];
   for(var i=0;i<n;i++){(function(k){var d=document.createElement("span");d.className="cdot"+(k===0?" on":"");d.addEventListener("click",function(){go(k);reset();});dotsWrap.appendChild(d);dots.push(d);})(i);}
-  function go(i){idx=(i+n)%n;track.style.transform="translateX("+(-idx*100)+"%)";dots.forEach(function(d,k){d.classList.toggle("on",k===idx);});}
-  function start(){timer=setInterval(function(){go(idx+1);},6000);}
+  slides.forEach(function(s,k){s.addEventListener("click",function(){if(k!==idx){go(k);reset();}});});
+  function go(i){
+    idx=(i+n)%n;
+    var s=slides[idx];
+    var x=s.offsetLeft + s.offsetWidth/2 - viewport.clientWidth/2;
+    track.style.transform="translateX("+(-x)+"px)";
+    slides.forEach(function(sl,k){sl.classList.toggle("active",k===idx);});
+    dots.forEach(function(d,k){d.classList.toggle("on",k===idx);});
+  }
+  function start(){timer=setInterval(function(){go(idx+1);},4000);}
   function reset(){clearInterval(timer);start();}
   var nx=document.getElementById("tNext"), pv=document.getElementById("tPrev"), car=document.getElementById("tCarousel");
   if(nx)nx.addEventListener("click",function(){go(idx+1);reset();});
   if(pv)pv.addEventListener("click",function(){go(idx-1);reset();});
   if(car){car.addEventListener("mouseenter",function(){clearInterval(timer);});car.addEventListener("mouseleave",reset);}
-  start();
+  window.addEventListener("resize",function(){go(idx);});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)go(idx);});},{threshold:.15});
+  io.observe(track);
+  go(0); start();
 })();
+
+/* FAQ accordion */
+document.querySelectorAll(".faq-q").forEach(function(q){q.addEventListener("click",function(){q.parentNode.classList.toggle("open");});});
 
 var mf=document.querySelector(".mouse-follower");
 window.addEventListener("mousemove",function(e){document.body.classList.add("mouse-on");
