@@ -123,7 +123,8 @@ body.mouse-on .mouse-follower{opacity:1}
 .sidenav>*{position:relative;z-index:2}
 .sidenav:hover{width:var(--nav-w-open)}
 .sn-brand{display:flex;align-items:center;gap:12px;padding:6px 0 0 22px;height:46px}
-.sn-mark{flex:0 0 auto;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:18px;color:#3a2900;background:linear-gradient(135deg,var(--secondary-bright),var(--secondary));box-shadow:0 6px 16px -4px rgba(242,169,0,.6)}
+.sn-mark{flex:0 0 auto;width:44px;height:44px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 6px 16px -4px rgba(0,0,0,.4)}
+.sn-mark img{height:52px;width:auto;max-width:none;display:block;margin:-3px 0 0 -3px}
 .sn-full{white-space:nowrap;opacity:0;transform:translateX(-6px);transition:.3s;transition-delay:.05s}
 .sidenav:hover .sn-full{opacity:1;transform:none}
 .sn-full .t{font-family:var(--font-display);font-size:18px;line-height:1.05}
@@ -263,6 +264,21 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 .quote p{font-size:15.5px;color:#fff;font-style:italic;position:relative;z-index:1}
 .quote .who{margin-top:16px;display:flex;align-items:center;gap:11px;font-weight:700;color:#fff}
 .quote .av{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;font-style:normal;font-family:var(--font-body);background:linear-gradient(135deg,var(--secondary-bright),var(--secondary))}
+/* testimonial carousel */
+.carousel{position:relative;max-width:840px;margin:40px auto 0}
+.carousel-viewport{overflow:hidden;border-radius:20px}
+.carousel-track{display:flex;align-items:stretch;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.tslide{flex:0 0 100%;min-width:100%;padding:4px}
+.tslide .quote{margin:0;height:100%;transition:none}
+.tslide .quote:hover{transform:none}
+.carousel-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.32);background:rgba(0,18,51,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:#fff;font-size:24px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .25s,transform .25s}
+.carousel-arrow:hover{background:rgba(0,18,51,.72);transform:translateY(-50%) scale(1.08)}
+.carousel-arrow.prev{left:-12px}
+.carousel-arrow.next{right:-12px}
+.carousel-dots{display:flex;justify-content:center;gap:9px;margin-top:22px}
+.cdot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;transition:.25s}
+.cdot.on{background:var(--secondary-bright);transform:scale(1.3)}
+@media (max-width:560px){.carousel-arrow.prev{left:2px}.carousel-arrow.next{right:2px}}
 
 /* ════ TEAM ════ */
 .team-group{margin-top:52px}
@@ -277,10 +293,16 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 #team .wrap{position:relative;z-index:1}
 .team-deco{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .team-aurora{position:absolute;inset:-30%;will-change:transform;filter:blur(26px);
-  background:radial-gradient(38% 38% at 28% 30%,rgba(26,76,204,.13),transparent 70%),radial-gradient(44% 44% at 74% 66%,rgba(242,169,0,.11),transparent 70%),radial-gradient(40% 40% at 60% 18%,rgba(0,115,153,.11),transparent 72%);
-  animation:team-drift 30s ease-in-out infinite alternate}
-@keyframes team-drift{0%{transform:rotate(0deg) scale(1) translate(0,0)}50%{transform:rotate(7deg) scale(1.08) translate(2%,-2%)}100%{transform:rotate(-6deg) scale(1.06) translate(-2%,2%)}}
+  background:radial-gradient(40% 40% at 28% 30%,rgba(26,76,204,.26),transparent 72%),radial-gradient(46% 46% at 74% 66%,rgba(242,169,0,.22),transparent 72%),radial-gradient(42% 42% at 60% 18%,rgba(0,115,153,.22),transparent 74%);
+  animation:team-drift 16s ease-in-out infinite alternate}
+@keyframes team-drift{0%{transform:rotate(-5deg) scale(1.05) translate(-2%,1%)}50%{transform:rotate(8deg) scale(1.12) translate(3%,-3%)}100%{transform:rotate(-7deg) scale(1.07) translate(-3%,3%)}}
 @media (prefers-reduced-motion:reduce){.team-aurora{animation:none}}
+.gh-toggle{cursor:pointer;user-select:none}
+.gh-toggle .garw{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;flex:0 0 auto;transition:transform .3s}
+.gh-toggle.open .garw{transform:rotate(90deg)}
+.gh .gcount{color:var(--outline);font-size:.62em;font-weight:600}
+.team-grid.cbody{display:none}
+.team-grid.cbody.open{display:flex}
 .member img{width:100%;height:100%;object-fit:cover;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
 .member:hover img{transform:scale(1.07)}
 .member .fallback{width:100%;height:100%;display:grid;place-items:center;font-family:var(--font-display);font-size:46px;color:#fff;background:linear-gradient(135deg,var(--primary),var(--tertiary-bright))}
@@ -305,21 +327,22 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 @keyframes fadein{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 
 /* ════ ALUMNI ROTATING BANNER ════ */
-.alumni-band{margin-top:36px;display:flex;flex-direction:column;gap:5px;overflow:hidden;padding:14px 0;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.arow{display:flex;width:max-content;gap:28px;white-space:nowrap;will-change:transform}
-.arow.r1{animation:marquee 46s linear infinite}
-.arow.r2{animation:marquee-rev 54s linear infinite}
-.arow.r3{animation:marquee 60s linear infinite}
-.arow.r4{animation:marquee-rev 50s linear infinite}
-.arow.r5{animation:marquee 66s linear infinite}
-.arow.r6{animation:marquee-rev 56s linear infinite}
-.arow.r7{animation:marquee 52s linear infinite}
-.arow.r8{animation:marquee-rev 70s linear infinite}
-.alumni-band:hover .arow{animation-play-state:paused}
-.aname{font-family:var(--font-display);font-weight:700;font-size:clamp(15px,1.7vw,26px);line-height:1.2;color:var(--primary)}
-.aname.alt{color:var(--tertiary-bright)}
-.aname .dot{color:var(--secondary-bright);margin:0 .15em}
+/* collapsible button (alumni) */
+.collapse-btn{display:inline-flex;align-items:center;gap:11px;margin-top:30px;padding:12px 22px;border-radius:999px;
+  font-family:var(--font-body);font-weight:700;font-size:15px;color:var(--primary);cursor:pointer;
+  background:linear-gradient(135deg,rgba(255,255,255,.7),rgba(255,255,255,.4));border:1px solid rgba(0,38,119,.18);
+  box-shadow:0 6px 18px rgba(0,18,51,.08);transition:transform .25s,box-shadow .25s}
+.collapse-btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,18,51,.14)}
+.collapse-btn .cbarw{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;transition:transform .3s}
+.collapse-btn.open .cbarw{transform:rotate(90deg)}
+.collapse-body{display:none;animation:fadein .5s ease}
+.collapse-body.open{display:block}
+.alumni-list{list-style:none;columns:5;column-gap:26px;margin-top:26px}
+.alumni-list li{break-inside:avoid;padding:9px 0;font-size:15px;font-weight:600;color:var(--on-surface-variant);
+  border-bottom:1px solid var(--outline-variant);display:flex;align-items:center;gap:10px}
+.alumni-list li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--secondary-bright);flex:0 0 auto}
+@media (max-width:900px){.alumni-list{columns:3}}
+@media (max-width:540px){.alumni-list{columns:2}}
 
 /* ════ STATS ════ */
 .statband{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:40px}
@@ -396,7 +419,7 @@ body.nav-open .scrim{opacity:1;visibility:visible}
 <div class="scrim" id="scrim"></div>
 
 <nav class="sidenav" id="sidenav">
-  <div class="sn-brand"><span class="sn-mark">AI</span><span class="sn-full"><span class="t">AI <b>Summer</b> School</span><br><span class="s">Medical Imaging Informatics</span></span></div>
+  <div class="sn-brand"><span class="sn-mark"><img src="photos%20and%20videos/Pitthexai_logo.png" alt="Pitt HexAI"></span><span class="sn-full"><span class="t">AI <b>Summer</b> School</span><br><span class="s">Medical Imaging Informatics</span></span></div>
   <div class="navlist" id="navlist">
     <a class="navlink active" data-to="home"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></svg></span><span class="lbl">Home</span></a>
     <a class="navlink" data-to="about"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span><span class="lbl">About</span></a>
@@ -609,12 +632,17 @@ body.nav-open .scrim{opacity:1;visibility:visible}
     <p class="lead reveal d2">Read what past participants have to say about their experience at the AI Summer School.</p>
   </div>
   <div class="wrap">
-    <div class="tgrid">
-      <div class="quote glass-dark sheen reveal-s"><span class="mark">&rdquo;</span><p>Everything was just so interesting and I feel like I have found something new that I might want to pursue in the future. Dr. Tafti and all the other instructors were very helpful and really facilitated the entire learning process. I found that AI and all these really hard things that I always thought were complicated were actually quite easy to understand.</p><div class="who"><span class="av">K</span>Katherine</div></div>
-      <div class="quote glass-dark sheen reveal-s d1"><span class="mark">&rdquo;</span><p>After coming here I learned a lot. I didn't know much about AI before. Now I've learned about machine learning and deep learning and the differences between them. I feel like AI is such a big, broad topic that can really be implemented into anything.</p><div class="who"><span class="av">S</span>Sophia</div></div>
-      <div class="quote glass-dark sheen reveal-s d2"><span class="mark">&rdquo;</span><p>I was so glad that I signed up because there are so many opportunities and so much to learn from this program. You can meet a lot of guest speakers, and we have a great teacher, Dr. Tafti. He will teach you so much about AI and medical imaging.</p><div class="who"><span class="av">Z</span>Zoe</div></div>
-      <div class="quote glass-dark sheen reveal-s d1"><span class="mark">&rdquo;</span><p>It was such a pleasure being part of the AI in Medical Imaging camp this past week. Thank you for leading such a fun and insightful experience! I really appreciated the engaging teaching style and the way complex concepts were broken down. The camp has sparked my interest in bioinformatics and the intersection between AI and medicine.</p><div class="who"><span class="av">H</span>Hrshikesh</div></div>
-      <div class="quote glass-dark sheen reveal-s d2"><span class="mark">&rdquo;</span><p>Thank you very much for conducting this AI Summer School. I feel like I learned a lot, and I am now interested in maybe pursuing a career in health informatics.</p><div class="who"><span class="av">P</span>Pragnya</div></div>
+    <div class="carousel reveal d1" id="tCarousel">
+      <button class="carousel-arrow prev" id="tPrev" aria-label="Previous testimonial">&#8249;</button>
+      <div class="carousel-viewport"><div class="carousel-track" id="tTrack">
+        <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>Everything was just so interesting and I feel like I have found something new that I might want to pursue in the future. Dr. Tafti and all the other instructors were very helpful and really facilitated the entire learning process. I found that AI and all these really hard things that I always thought were complicated were actually quite easy to understand.</p><div class="who"><span class="av">K</span>Katherine</div></div></div>
+        <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>After coming here I learned a lot. I didn't know much about AI before. Now I've learned about machine learning and deep learning and the differences between them. I feel like AI is such a big, broad topic that can really be implemented into anything.</p><div class="who"><span class="av">S</span>Sophia</div></div></div>
+        <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>I was so glad that I signed up because there are so many opportunities and so much to learn from this program. You can meet a lot of guest speakers, and we have a great teacher, Dr. Tafti. He will teach you so much about AI and medical imaging.</p><div class="who"><span class="av">Z</span>Zoe</div></div></div>
+        <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>It was such a pleasure being part of the AI in Medical Imaging camp this past week. Thank you for leading such a fun and insightful experience! I really appreciated the engaging teaching style and the way complex concepts were broken down. The camp has sparked my interest in bioinformatics and the intersection between AI and medicine.</p><div class="who"><span class="av">H</span>Hrshikesh</div></div></div>
+        <div class="tslide"><div class="quote glass-dark"><span class="mark">&rdquo;</span><p>Thank you very much for conducting this AI Summer School. I feel like I learned a lot, and I am now interested in maybe pursuing a career in health informatics.</p><div class="who"><span class="av">P</span>Pragnya</div></div></div>
+      </div></div>
+      <button class="carousel-arrow next" id="tNext" aria-label="Next testimonial">&#8250;</button>
+      <div class="carousel-dots" id="tDots"></div>
     </div>
   </div>
 </section>
@@ -636,7 +664,8 @@ body.nav-open .scrim{opacity:1;visibility:visible}
     <span class="eyebrow reveal">Our growing community</span>
     <h2 class="title reveal d1">Alumni</h2>
     <p class="lead reveal d2">Students from four cohorts who have come through the AI Summer School (first names only).</p>
-    <div class="alumni-band reveal d2" id="alumniBand"></div>
+    <button class="collapse-btn reveal d2" id="alumniBtn"><span class="cbarw">&#9654;</span> <span id="alumniBtnLbl">Show alumni</span></button>
+    <div class="collapse-body" id="alumniBody"><ul class="alumni-list" id="alumniList"></ul></div>
   </div>
 </section>
 
@@ -802,26 +831,29 @@ function memberHTML(m){
     +'<div class="ba">'+esc(m.af||"")+'</div><div class="bt">'+bioBody+'</div>'+link+'</div></div>';
 }
 function teamImgFail(img){var d=document.createElement("div");d.className="fallback";d.textContent=img.dataset.init||"?";img.parentNode.insertBefore(d,img);img.remove();}
-function groupHTML(t,a){return '<div class="team-group reveal"><div class="gh"><h3>'+t+'</h3><span class="line"></span></div><div class="team-grid">'+a.map(memberHTML).join("")+'</div></div>';}
+function groupHTML(t,a){
+  var collapsible=/speaker/i.test(t);
+  var grid='<div class="team-grid'+(collapsible?' cbody':'')+'">'+a.map(memberHTML).join("")+'</div>';
+  if(collapsible){
+    return '<div class="team-group reveal"><div class="gh gh-toggle" data-gtoggle><h3>'+t+' <span class="gcount">('+a.length+')</span></h3><span class="line"></span><span class="garw">&#9654;</span></div>'+grid+'</div>';
+  }
+  return '<div class="team-group reveal"><div class="gh"><h3>'+t+'</h3><span class="line"></span></div>'+grid+'</div>';
+}
 function renderTeam(root,data){document.getElementById(root).innerHTML=Object.keys(data).map(function(k){return groupHTML(k,data[k]);}).join("");}
 renderTeam("teamRoot",team2026);
 renderTeam("team2025Root",team2025);
 
-/* alumni multilayer rotating banner (8 rows) */
+/* alumni collapsible list */
 (function(){
-  var ROWS=8, n=alumni.length, per=Math.ceil(n/ROWS), html="";
-  for(var i=0;i<ROWS;i++){
-    var names=alumni.slice(i*per,(i+1)*per);
-    if(!names.length) names=alumni.slice(0,per); /* keep every row populated */
-    var seq=names.map(function(name,idx){
-      var alt=(idx%2===1)?" alt":"";
-      return '<span class="aname'+alt+'">'+name+'</span><span class="aname dot">&middot;</span>';
-    }).join("");
-    /* repeat enough times to fill wide screens for a seamless loop */
-    var unit=seq+seq+seq;
-    html+='<div class="arow r'+(i+1)+'">'+unit+unit+'</div>';
-  }
-  document.getElementById("alumniBand").innerHTML=html;
+  var list=document.getElementById("alumniList"); if(!list) return;
+  list.innerHTML=alumni.map(function(a){return "<li>"+a+"</li>";}).join("");
+  var btn=document.getElementById("alumniBtn"), body=document.getElementById("alumniBody"), lbl=document.getElementById("alumniBtnLbl");
+  lbl.textContent="Show alumni ("+alumni.length+")";
+  btn.addEventListener("click",function(){
+    var open=body.classList.toggle("open"); btn.classList.toggle("open",open);
+    lbl.textContent=(open?"Hide alumni (":"Show alumni (")+alumni.length+")";
+    if(open) setTimeout(observeReveals,30);
+  });
 })();
 
 document.getElementById("yr").textContent=new Date().getFullYear();
@@ -904,6 +936,30 @@ window.addEventListener("scroll",updateCurves,{passive:true});
 window.addEventListener("resize",buildCurves);
 window.addEventListener("load",buildCurves);
 buildCurves(); setTimeout(buildCurves,400); setTimeout(buildCurves,1200);
+
+/* collapsible team groups (speakers) */
+document.addEventListener("click",function(e){
+  var t=e.target.closest&&e.target.closest("[data-gtoggle]"); if(!t) return;
+  t.classList.toggle("open");
+  var grid=t.nextElementSibling;
+  if(grid){grid.classList.toggle("open"); if(grid.classList.contains("open")) setTimeout(observeReveals,30);}
+});
+
+/* testimonial carousel */
+(function(){
+  var track=document.getElementById("tTrack"); if(!track) return;
+  var slides=track.children, n=slides.length, idx=0, timer=null;
+  var dotsWrap=document.getElementById("tDots"), dots=[];
+  for(var i=0;i<n;i++){(function(k){var d=document.createElement("span");d.className="cdot"+(k===0?" on":"");d.addEventListener("click",function(){go(k);reset();});dotsWrap.appendChild(d);dots.push(d);})(i);}
+  function go(i){idx=(i+n)%n;track.style.transform="translateX("+(-idx*100)+"%)";dots.forEach(function(d,k){d.classList.toggle("on",k===idx);});}
+  function start(){timer=setInterval(function(){go(idx+1);},6000);}
+  function reset(){clearInterval(timer);start();}
+  var nx=document.getElementById("tNext"), pv=document.getElementById("tPrev"), car=document.getElementById("tCarousel");
+  if(nx)nx.addEventListener("click",function(){go(idx+1);reset();});
+  if(pv)pv.addEventListener("click",function(){go(idx-1);reset();});
+  if(car){car.addEventListener("mouseenter",function(){clearInterval(timer);});car.addEventListener("mouseleave",reset);}
+  start();
+})();
 
 var mf=document.querySelector(".mouse-follower");
 window.addEventListener("mousemove",function(e){document.body.classList.add("mouse-on");
